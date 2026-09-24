@@ -5,6 +5,8 @@ import os
 class Settings(BaseSettings):
     # Required settings
     OPENAI_API_KEY: str
+    WATSONX_API_KEY: str
+    PROJECT_ID: str
 
     # Optional settings with defaults
     MAX_FILE_SIZE: int = MAX_FILE_SIZE

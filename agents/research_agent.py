@@ -1,12 +1,13 @@
 from ibm_watsonx_ai.foundation_models import ModelInference
 from ibm_watsonx_ai import Credentials, APIClient
 from typing import Dict, List
-from langchain.schema import Document
+from langchain_core.documents import Document
 from config.settings import settings
 import json
 
 credentials = Credentials(
                    url = "https://us-south.ml.cloud.ibm.com",
+                   api_key = settings.WATSONX_API_KEY,
                   )
 client = APIClient(credentials)
 
@@ -21,7 +22,7 @@ class ResearchAgent:
         self.model = ModelInference(
             model_id="meta-llama/llama-4-maverick-17b-128e-instruct-fp8", 
             credentials=credentials,
-            project_id="skills-network",
+            project_id=settings.PROJECT_ID,
             params={
                 "max_tokens": 300,            # Adjust based on desired response length
                 "temperature": 0.3,           # Controls randomness; lower values make output more deterministic

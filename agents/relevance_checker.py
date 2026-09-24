@@ -3,11 +3,13 @@ from ibm_watsonx_ai import Credentials, APIClient
 from config.settings import settings
 import re
 import logging
+from config.settings import settings
 
 logger = logging.getLogger(__name__)
 
 credentials = Credentials(
                    url = "https://us-south.ml.cloud.ibm.com",
+                   api_key = settings.WATSONX_API_KEY,
                   )
 client = APIClient(credentials)
 
@@ -17,7 +19,7 @@ class RelevanceChecker:
         self.model = ModelInference(
             model_id="ibm/granite-4-h-small",
             credentials=credentials,
-            project_id="skills-network",
+            project_id=settings.PROJECT_ID,
             params={"temperature": 0, "max_tokens": 10},
         )
 

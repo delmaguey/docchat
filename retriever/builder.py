@@ -3,7 +3,7 @@ from langchain_openai import OpenAIEmbeddings
 from ibm_watsonx_ai.metanames import EmbedTextParamsMetaNames
 from langchain_ibm import WatsonxEmbeddings
 from langchain_community.retrievers import BM25Retriever
-from langchain.retrievers import EnsembleRetriever
+from langchain_classic.retrievers import EnsembleRetriever
 from config.settings import settings
 import logging
 
@@ -20,8 +20,9 @@ class RetrieverBuilder:
         watsonx_embedding = WatsonxEmbeddings(
             model_id="ibm/granite-embedding-278m-multilingual",
             url="https://us-south.ml.cloud.ibm.com",
-            project_id="skills-network",
-            params=embed_params
+            project_id=settings.PROJECT_ID,
+            params=embed_params,
+            api_key = settings.WATSONX_API_KEY
         )
         self.embeddings = watsonx_embedding
         
